@@ -1,0 +1,40 @@
+<div class="content">
+    <div class="adicionar">
+        <div class="grid">
+            <div class="row title">
+                <p class="title">Adicionar despesa</p> 
+            </div>
+            <div class="row valor">
+                <div class="center">
+                    <p class="label">R$</p>
+                    <input type="tel" ng-model="vlDespesa" placeholder="Digite o valor">
+                </div>
+
+            </div>
+            <div class="row cloud">
+                
+                <div class="center">
+                    <input type="text" ng-model="stCategoria">
+                    <span ng-repeat="c in categorias" ng-click="adicionarCategoria(c.stCategoria)">{{c.stCategoria}}</span>
+                </div>
+            </div>
+            <div class="row valor">
+                <div class="center">
+                    <input type="date"  ng-model="dtDespesa" placeholder="Digite a data">
+                </div>
+            </div>
+            <div class="row valor">
+                <div class="center">
+                    <input type="text" ng-model="stObservacao" placeholder="Observação">
+                </div>
+            </div>
+            <div class="row buttons">
+                <div class="center">
+                    <a href="#/home" class="button button-cancel">Cancelar</a>
+                    <button class="button button-add" ng-click="adicionar()">Adicionar</button>
+                </div>
+            </div>
+        </div>    
+    </div>
+</div>
+

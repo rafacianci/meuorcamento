@@ -1,0 +1,28 @@
+<div class="content">
+    <div class="header">
+        
+    </div>
+    <table>
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Valor</th>
+                <th>Data</th>
+                <th>Categorias</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="d in despesas">
+                <td>{{d.cdDespesa}}</td>
+                <td>{{d.vlDespesa}}</td>
+                <td>{{d.dtDespesa}}</td>
+                <td>{{d.stCategorias}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<style>
+    .header{
+        height: 44px;
+    }
+</style>
