@@ -1,0 +1,94 @@
+body {
+    background-color: #EB4A24;   
+    box-sizing: border-box;
+    margin: 0px;
+    padding: 0px;
+}
+.content{
+    bottom: 15px;
+    left: 15px;
+    position: absolute;
+    right: 15px;
+    top: 15px;
+}
+.grid{
+    background: -moz-radial-gradient(circle, #EB4A24, #BD3617);
+    border: 2px solid #BD3617;
+    border-radius: 10px;
+    height: 100%;
+    width: 100%;
+}
+
+/*=============== Home ================*/
+.home{
+    background-color:#EB4A24;   
+    height: 100%;
+    width: 100%;
+}
+.home .row{
+    border-bottom: 1px solid #FFF;
+    float: left;
+    height: 40%;
+    position: relative;
+    width: 100%;
+}
+.home .row:last-child{
+    border: none;
+}
+
+.home .logo{
+    background-color: rgba(255,255,255,1);
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    color: #EB4A24;
+    height: 20%;
+    position: relative;
+}
+.home .logo span{
+    bottom: 50%;
+    font-size: 48px;
+    margin-bottom: -25.25px;
+    position: absolute;
+    text-align: center;
+    width: 100%;
+}
+.home .column{
+    color: #FFF;
+    float: left;
+    height: 100%;
+    position: relative;
+    text-decoration: none;
+    width: 50%;
+    box-sizing: border-box;
+}
+.home .column{
+    border-right: 1px solid #FFF;
+}
+.home .column:last-child{
+    border-right: none;
+}
+.home .column p{
+    text-align: center;
+}
+.home .column .icon{
+    font-size: 48px;
+    height: 48px;
+    margin: -24px 0 0 -24px;
+    left: 50%;
+    top: 50%;
+    position: absolute;
+    width: 48px;
+}
+.home .column .label{
+    font-size: 16px;
+    position: absolute;
+    top: 60%;
+    width: 100%;
+}
+
+/*=============== Adicionar ================*/
+
+.adicionar .title{
+    background: #FFF;
+    height: 44px;
+}

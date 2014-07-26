@@ -24,13 +24,16 @@ app.controller('HomeCtrl', function($scope) {
     console.log('Moises');
 });
 
-app.controller('AdicionarCtrl', function($scope) {  
+app.controller('AdicionarCtrl', function($scope, $location) {  
     
     var categoriaModel = new model.Categoria();
-    loadCategorias();
     
+    $scope.dtDespesa = new Date();
     
     $scope.adicionar = function(){
+        if (!($scope.vlDespesa) && !($scope.vlDespesa > 0)){
+            return;
+        }
         categorias = new String($scope.stCategoria).split(",")
         var cdsCategorias = [];
         
@@ -48,7 +51,6 @@ app.controller('AdicionarCtrl', function($scope) {
                 categoriaModel.insert({stCategoria : categoria}, function(cdCategoria){
                     cdsCategorias.push(cdCategoria);
                 });
-                loadCategorias();
             }
         }
         var despesaModel = new model.Despesa();
@@ -67,7 +69,16 @@ app.controller('AdicionarCtrl', function($scope) {
                 });
             }
         })
+        $location.path('/home')
     }   
+    
+    $scope.addCategoria = function(stCategoria){
+        var catArray = String($scope.stCategoria).split(',');
+        cat = catArray[catArray.length - 1].trim();
+        $scope.stCategoria = String($scope.stCategoria).replace(cat, stCategoria + ", ");
+        $scope.categorias = {};
+        document.getElementById("categoria").focus();
+    }
     
     $scope.adicionarCategoria = function(stCategoria){
         if(!$scope.stCategoria){
@@ -77,15 +88,26 @@ app.controller('AdicionarCtrl', function($scope) {
         }
     }
     
-    $scope.addCategoria = function(){         
-        loadCategorias();
-    }
-    
-    function loadCategorias () {
-        categoriaModel.fetchAll({limit : 10, order : 'qtUsado'}, function(categorias){
+    $scope.listCategorias = function(){
+        var catArray = String($scope.stCategoria).split(',');
+        cat = catArray[catArray.length - 1].trim();
+        
+        persistence.executeSql("SELECT * FROM tbcategoria WHERE stCategoria LIKE '" + cat + "%'", [], function(categorias){
+            console.log(categorias);
+            if(categorias.length == 0){
+                $scope.categorias = {};
+            }
             $scope.categorias = categorias;
             $scope.$apply();
         })
+        
+    }
+
+    $scope.textAreaAdjuste = function($event){
+        if($event.keyCode == 13){
+            var ta = document.getElementById('observacao');
+            ta.style.height = (ta.scrollHeight) + "px";
+        }
     }
     
 });

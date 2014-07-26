@@ -1,6 +1,13 @@
+*{
+    box-sizing: border-box;
+    font-family: "Roboto", "Droid Sans", sans-serif;
+    list-style: none;
+    text-decoration: none;
+}
 body {
     background-color: #EB4A24;   
     box-sizing: border-box;
+    font-family: "Roboto", "Droid Sans", sans-serif;
     margin: 0px;
     padding: 0px;
 }
@@ -18,7 +25,77 @@ body {
     height: 100%;
     width: 100%;
 }
-
+.title{
+    background-color: #FFF;
+    height: 54px;
+    /*position: fixed;*/
+    width: 100%;
+}
+.title span, .title a{
+    display: block;
+    position: absolute;
+}
+.title .titulo{
+    font-weight: bold;
+    margin-top: 18px;
+    text-align: center;
+    width: 100%;
+}
+.title .button-left{
+    left: 0px;
+}
+.title .button-right{
+    right: 0px;
+}
+.title .button-left, .title .button-right{
+    color: #EB4A24;
+    padding: 18px;
+    z-index: 2;
+}
+.input-android{
+    background: bottom left linear-gradient(#a9a9a9, #a9a9a9) no-repeat, bottom center linear-gradient(#a9a9a9, #a9a9a9) repeat-x, bottom right linear-gradient(#a9a9a9, #a9a9a9) no-repeat;
+    background-size: 1px 6px, 1px 1px, 1px 6px;
+    border: none;
+    color: #FFF;
+    font-size: 18px;
+    height: 30px;
+    outline: none;
+}
+.input-android:focus{
+    background: bottom left linear-gradient(#0099cc, #0099cc) no-repeat, bottom center linear-gradient(#0099cc, #0099cc) repeat-x, bottom right linear-gradient(#0099cc, #0099cc) no-repeat;
+    background-size: 1px 6px, 1px 1px, 1px 6px; 
+}  
+.input-android::-webkit-input-placeholder {
+    color: #EEE;
+}
+.input-icon{
+    float: left;
+    height: 32px;
+    margin-bottom: 20px;
+    margin-top: 20px;
+    padding: 0px 20px;
+    position: relative;
+    width: 100%;
+}
+.input-icon .input-android{
+    padding-bottom: 8px;
+    padding-left: 30px;
+    width: 100%;
+}
+.input-icon .label{
+    color: #EEE;
+    font-size: 14px;
+    height: 14px;
+    left: 30px;
+    line-height: 14px;
+    margin-top: -12px;
+    top: 50%;
+    position: absolute;
+    width: 14px;
+}
+.input-icon .label.ion-social-usd{
+    font-size: 15px;
+}
 /*=============== Home ================*/
 .home{
     background-color:#EB4A24;   
@@ -42,10 +119,13 @@ body {
     border-top-right-radius: 8px;
     color: #EB4A24;
     height: 20%;
+    position: relative;
 }
-.home .logo p{
+.home .logo span{
+    bottom: 50%;
     font-size: 48px;
-    line-height: 48px;
+    margin-bottom: -25.25px;
+    position: absolute;
     text-align: center;
     width: 100%;
 }
@@ -81,4 +161,174 @@ body {
     position: absolute;
     top: 60%;
     width: 100%;
+}
+
+/*=============== Adicionar ================*/
+.adicionar{
+    background-color:#EB4A24;   
+    height: 100%;
+    width: 100%;
+}
+.adicionar .grid{
+    border: none;
+}
+.adicionar .row{
+    border-bottom: 1px solid #FFF;
+    float: right;
+    height: auto;
+    position: relative;
+    width: 100%;
+}
+.adicionar .valor{
+    height: auto;
+    position: relative;
+}
+.adicionar .valor .label{
+    background-color: #EEE;
+    border-right: 1px solid #CCC;
+    border-bottom-left-radius: 8px;
+    border-top-left-radius: 8px;
+    color: #EB4A24;
+    font-size: 16px;
+    font-weight: bold;
+    line-height: 16px;
+    position: absolute;
+    padding: 8px 6px 8px 15px;
+    top: 0px;
+    z-index: 2;
+}
+.adicionar .input{
+    height: 31px;
+    margin: 20px auto;
+    position: relative;
+    width: 90%;
+}
+.adicionar .valor input{
+    box-sizing: border-box;
+    color: #EB4A24;
+    margin: auto;
+    padding: 6px;
+    padding-left: 50px;
+    text-align: right;
+    width: 100%;
+}
+.adicionar .cloud{
+    height: 164px;
+}
+.adicionar .cloud input, .adicionar .data input, .adicionar .observacao input{
+    box-sizing: border-box;
+    color: #EB4A24;
+    font-size: 14px;
+    margin: auto;
+    padding: 6px;
+    width: 100%;
+}
+.adicionar .cloud .span{
+    background-color: #D93E1A;
+    border: 1px solid #BD3617;
+    border-radius: 8px;
+    color: #EB4A24;
+    font-size: 16px;
+    height: 83px;
+    margin-top: 5px;
+    padding: 5px;
+    overflow-x: hidden;
+    overflow-y: scroll;
+}
+.adicionar .cloud span{
+    background: #FFF;
+    border-radius: 5px;
+    display: block; 
+    float: left;
+    margin-bottom: 5px;
+    margin-right: 5px;
+    padding: 6px 12px;
+}
+.adicionar .observacao {
+    height: 83px;
+}
+.adicionar .categoria-lista{
+    background-color: #BD3617;
+    border: 1px solid #BD3617;
+    height: 150px;
+    left: 20px;
+    margin: 0px;
+    padding: 0px;
+    position: absolute;
+    overflow-y: scroll;
+    top: 29px;
+    width: 50%;
+    z-index: 3;
+}
+.adicionar .categoria-lista li{
+    background-color: #FFF;
+    border-bottom: 1px solid #D93E1A;
+    padding: 10px 10px 10px 52px;
+    color: #D93E1A;
+}
+/* ========== VISUALIZAR =========== */
+.visualizar{
+    background-color:#EB4A24;   
+    height: 100%;
+    width: 100%;
+}
+.visualizar .row{
+    border-bottom: 1px solid #FFF;
+    float: right;
+    height: auto;
+    position: relative;
+    width: 100%;
+}
+.visualizar .lista{
+    background: #D93E1A;
+    bottom: 0px;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+    float: left;
+    margin: 0px;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    padding: 0px;
+    position: absolute;
+    top: 54px;
+    width: 100%;
+}
+
+.visualizar .item{
+    background: #EB4A24;
+    border-bottom: 1px solid #BD3617;
+    box-shadow: 1px 1px 1px #BD3617;
+    box-sizing: border-box;
+    color: #FFF;
+    float: left;
+    height: 70px;
+    margin: 0px;
+    margin-bottom: 3px;
+    padding: 10px;
+    position: relative;
+    width: 100%;
+}
+.visualizar .item .valor{
+    box-sizing: border-box;
+    font-size: 18px;
+    font-weight: bold;
+    right: 10px;
+    position: absolute;
+    text-align: right;
+    width: 100%;
+}
+.visualizar .item .data{
+    font-size: 18px;
+    font-weight: bold;
+    left: 10px;
+    position: absolute;
+}   
+.visualizar .item .categoria{
+    float: left;
+    position: relative;
+    margin: 28px 0px 0px 0px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 100%;
+    white-space:nowrap; 
 }

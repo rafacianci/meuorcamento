@@ -1,40 +1,29 @@
-<div class="content">
-    <div class="adicionar">
-        <div class="grid">
-            <div class="row title">
-                <p class="title">Adicionar despesa</p> 
-            </div>
-            <div class="row valor">
-                <div class="center">
-                    <p class="label">R$</p>
-                    <input type="tel" ng-model="vlDespesa" placeholder="Digite o valor">
-                </div>
-
-            </div>
-            <div class="row cloud">
-                
-                <div class="center">
-                    <input type="text" ng-model="stCategoria">
-                    <span ng-repeat="c in categorias" ng-click="adicionarCategoria(c.stCategoria)">{{c.stCategoria}}</span>
-                </div>
-            </div>
-            <div class="row valor">
-                <div class="center">
-                    <input type="date"  ng-model="dtDespesa" placeholder="Digite a data">
-                </div>
-            </div>
-            <div class="row valor">
-                <div class="center">
-                    <input type="text" ng-model="stObservacao" placeholder="Observação">
-                </div>
-            </div>
-            <div class="row buttons">
-                <div class="center">
-                    <a href="#/home" class="button button-cancel">Cancelar</a>
-                    <button class="button button-add" ng-click="adicionar()">Adicionar</button>
-                </div>
-            </div>
-        </div>    
-    </div>
+<div class="adicionar">
+    <div class="grid">
+        <div class="title">
+            <a ng-href="#/home" class="button-left icon ion-chevron-left">Voltar</a>
+            <span class="titulo">Despesa</span> 
+            <span class="button-right icon ion-checkmark-round" ng-click="adicionar()" ng-show="vlDespesa > 0 && stCategoria.length > 1">Feito</span>
+        </div>
+        <div class="input-icon">
+            <span class="label ion-social-usd"></span>
+            <input class="input-android" type="tel" ng-model="vlDespesa" placeholder="Digite o valor">
+        </div>
+        <div class="input-icon">
+            <span class="label ion-android-storage"></span>
+            <input class="input-android" id="categoria" type="text" ng-model="stCategoria" placeholder="Marcadores separados por vírgula" ng-change="listCategorias()">
+            <ul class="categoria-lista" ng-show="categorias.length > 0">
+                <li ng-repeat="c in categorias" ng-click="addCategoria(c.stCategoria)">{{c.stCategoria}}</li>
+            </ul>
+        </div>
+        <div class="input-icon">
+            <span class="label ion-android-calendar"></span>
+            <input class="input-android" type="date" ng-model="dtDespesa" placeholder="Digite a data">
+        </div>
+        <div class="input-icon">
+            <span class="label ion-android-note"></span>
+            <textarea id="observacao" class="input-android" ng-keyup="textAreaAdjuste($event)" ng-model="stObservacao" placeholder="Observação"></textarea>
+        </div>
+    </div>    
 </div>
 
