@@ -1,5 +1,5 @@
 *{
-    box-sizing: border-box;
+    box-sizing: border-box; 
     font-family: "Roboto", "Droid Sans", sans-serif;
     list-style: none;
     text-decoration: none;
@@ -27,9 +27,13 @@ body {
 }
 .title{
     background-color: #FFF;
+    border-bottom: 1px solid #CCC;
+    box-shadow: 1px 1px 1px #CCC;
     height: 54px;
-    /*position: fixed;*/
+    position: fixed;
+    top: 0px;
     width: 100%;
+    z-index: 100;
 }
 .title span, .title a{
     display: block;
@@ -96,6 +100,14 @@ body {
 .input-icon .label.ion-social-usd{
     font-size: 15px;
 }
+.page{
+    bottom: 0px;
+    float: left;
+    position: absolute;
+    top: 55px;
+    width: 100%;
+}
+
 /*=============== Home ================*/
 .home{
     background-color:#EB4A24;   
@@ -123,10 +135,10 @@ body {
 }
 .home .logo span{
     bottom: 50%;
-    font-size: 48px;
+    font-size: 32px;
     margin-bottom: -25.25px;
     position: absolute;
-    text-align: center;
+    text-align: c   enter;
     width: 100%;
 }
 .home .column{
@@ -331,4 +343,9 @@ body {
     text-overflow: ellipsis;
     width: 100%;
     white-space:nowrap; 
+}
+.view-animate{
+    height: 100%;
+    position: absolute;
+    width: 100%;
 }

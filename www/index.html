@@ -5,9 +5,12 @@
         <meta name="viewport" content="user-scalable=no, initial-scale=1, width=device-width, target-densitydpi=device-dpi">
         
         <link rel="stylesheet" type="text/css" href="css/app.css" />
+        <link rel="stylesheet" type="text/css" href="css/home.css" />
         <link rel="stylesheet" type="text/css" href="lib/css/ionicons.min.css"/>
+        <link rel="stylesheet" type="text/css" href="bower_components/angular-carousel/dist/angular-carousel.min.css"/>
 
         <script type="text/javascript" src="cordova.js"></script>
+        <script type="text/javascript" src="bower_components/jquery/dist/jquery.min.js"></script>
         <script type="text/javascript" src="lib/js/angular.min.js"></script>
         <script type="text/javascript" src="lib/js/angular-animate.min.js"></script>
         <script type="text/javascript" src="lib/js/angular-resource.min.js"></script>
@@ -15,13 +18,24 @@
         <script type="text/javascript" src="lib/js/persistence.js"></script>
         <script type="text/javascript" src="lib/js/functions.js"></script>
         <script type="text/javascript" src="js/index.js"></script>
+        <script type="text/javascript" src="bower_components/amcharts/dist/amcharts/amcharts.js"></script>
+        <script type="text/javascript" src="bower_components/amcharts/dist/amcharts/serial.js"></script>
+        <script type="text/javascript" src="bower_components/amcharts/dist/amcharts/pie.js"></script>
+        <script type="text/javascript" src="bower_components/amcharts/dist/amcharts/funnel.js"></script>
+        <script type="text/javascript" src="bower_components/amcharts/dist/amcharts/themes/chalk.js"></script>
+        <script type="text/javascript" src="bower_components/amcharts/dist/amcharts/themes/dark.js"></script>
+        <script type="text/javascript" src="bower_components/amcharts/dist/amcharts/themes/patterns.js"></script>
+        <script type="text/javascript" src="bower_components/angular-touch/angular-touch.min.js"></script>
+        <script type="text/javascript" src="bower_components/angular-carousel/dist/angular-carousel.min.js"></script>
+        
+        
         <script>
-            persistence.open({name: "moises1", version: "", description: "", size: (5 * 5 * 1024)}, function() {
+            persistence.open({name: "moises2", version: "", description: "", size: (5 * 5 * 1024)}, function() {
                 console.log("Tabelas criadas");
             });
         </script>
 
-        <title>Finanças</title>
+        <title>Meu orçamento</title>
     </head>
     <body>
         <div class="view-animate-container">

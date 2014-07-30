@@ -1,19 +1,20 @@
 <div class="adicionar">
-    <div class="grid">
-        <div class="title">
-            <a ng-href="#/home" class="button-left icon ion-chevron-left">Voltar</a>
-            <span class="titulo">Despesa</span> 
-            <span class="button-right icon ion-checkmark-round" ng-click="adicionar()" ng-show="vlDespesa > 0 && stCategoria.length > 1">Feito</span>
-        </div>
+    <div class="title">
+        <a ng-href="#/home" class="button-left icon ion-chevron-left">Voltar</a>
+        <span class="titulo">Despesa</span> 
+        <span class="button-right icon ion-checkmark-round" ng-click="adicionar()" ng-show="vlDespesa > 0 && categoria.stCategoria.length > 1">Feito</span>
+    </div>
+    <div class="page">
         <div class="input-icon">
             <span class="label ion-social-usd"></span>
             <input class="input-android" type="tel" ng-model="vlDespesa" placeholder="Digite o valor">
         </div>
         <div class="input-icon">
             <span class="label ion-android-storage"></span>
-            <input class="input-android" id="categoria" type="text" ng-model="stCategoria" placeholder="Marcadores separados por vírgula" ng-change="listCategorias()">
+            <input type="hidden" ng-model="categoria">
+            <input class="input-android" id="categoria" type="text" value="{{categoria.stCategoria}}" placeholder="Digite a categoria" ng-change="listCategorias()" ng-model="categoriaAux">
             <ul class="categoria-lista" ng-show="categorias.length > 0">
-                <li ng-repeat="c in categorias" ng-click="addCategoria(c.stCategoria)">{{c.stCategoria}}</li>
+                <li ng-repeat="c in categorias" ng-click="addCategoria(c)">{{c.stCategoria}}</li>
             </ul>
         </div>
         <div class="input-icon">

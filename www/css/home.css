@@ -1,0 +1,96 @@
+#home .graficos{
+    /*border-bottom: 1px solid #FFF;*/
+    display: block;
+    float: left;
+    height: 60%;
+    position: relative;
+    margin-top: 0px;
+    width: 100%;
+    z-index: 1;
+    background-color: #BD3617;    
+}
+#home .buttons{
+    height: 40%;
+    width: 100%;
+    position: relative;
+    float: left;
+}
+
+#home .chart{
+    margin: 25px auto;
+    width: 85%;
+}
+#home .rn-carousel-container{
+    height: 100%;
+}
+#home .chart div div a{
+    display: none!important;
+}
+
+#home .rn-carousel-control{
+    color: #FFF;
+    z-index: 100;
+}
+#home .rn-carousel-indicator span{
+    color: #AAA;
+}
+#home .rn-carousel-indicator span.active{
+    color: #FFF;
+}
+#home .rn-carousel-indicator{
+    background: none;
+    bottom: 5px;
+    z-index: 100;
+    /* color: #0FF; */
+    display: block;
+    position: absolute;
+}
+
+#home .seta-left{
+    left: 5px;
+}
+#home .seta-right{
+    right: 5px;
+}
+
+#home .button-double{
+    float: left;
+    font-size: 16px;
+    font-weight: bold;
+    height: 33.4%;
+    position: relative;
+    width: 100%;
+    text-align: center;
+    vertical-align: middle; 
+}
+#home .button-double a{
+    margin-top: -10px;
+    top: 50%;
+    position: absolute;
+    width: 100%;
+    display: block;
+    height: 100%;
+}
+#home .button-despesas{
+    background-color: #FEC628;
+}
+#home .button-receitas{
+    background-color: #3498db;
+}
+#home .button-sobre{
+    background-color: #B8B8B1;
+}
+#home .button-plus{
+    background: rgba(255, 255, 255, 0.3);
+    border: none;
+    float: right;
+    height: 100%;
+    position: relative;
+    right: 0px;
+    width: 80px;
+}
+#home .button-plus .middle{
+    margin-top: -10px;
+    top: 50%;
+    position: absolute;
+}

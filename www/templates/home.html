@@ -1,31 +1,62 @@
-<div class="content">
-    <div class="home">
-        <div class="grid">
-            <div class="row logo">
-                <!--<p class="icon "></p>-->
-                <span class="title ion-arrow-graph-up-right">Meu orçamento</span> 
-            </div>
-            <div class="row">
-                <a href="#/adicionar" class="column">
-                    <p class="icon ion-plus-round"></p>
-                    <p class="label">Adicionar</p>
-                </a>
-                <a href="#/visualizar" class="column">
-                    <p class="icon ion-document"></p>
-                    <p class="label">Visualizar</p>
-                </a>
-            </div>
-            <div class="row">
-                <div class="column">
-                    <p class="icon ion-gear-a"></p>
-                    <p class="label">Configuraçoes</p>
-                </div>
-                <div class="column">
-                    <p class="icon ion-information"></p>
-                    <p class="label">Sobre</p>
-                </div>
-            </div>
-        </div>    
+<div id="home">
+    <div class="title">
+        <span class="titulo">Meu orçamento</span> 
     </div>
-</div>
+    <div class="page">
+        <div class="graficos">
+            <div rn-carousel rn-carousel-control rn-carousel-indicator>
+                <div class="grafico active">
+                    <div id="chartdiv-geral" class="chart"></div>
+                </div>
+                <div class="grafico">
+                    <div id="chartdiv-despesas" class="chart"></div>
+                </div>
+                <div class="grafico">
+                    <div id="chartdiv-receitas" class="chart"></div>
+                </div>
+            </div>
+
+        </div>
+        <div class="buttons">
+            <div class="button-double button-despesas" ng-click="goTo('/despesa/visualizar')">
+                <a>Despesas</a>
+                <span class="button-plus" ng-click="goTo('/despesa/adicionar')">
+                    <a class="middle">+</a>
+                </span>
+            </div>
+            <div class="button-double button-receitas">
+                <a class="">Receitas</a>
+                <span class="button-plus">
+                    <span class="middle">+</span>
+                </span>
+            </div>
+            <div class="button-double button-sobre">
+                <a class="">Sobre</a>
+            </div>
+        </div>
+
+    </div>
+
+
+    <!--    <div class="row">
+           <a href="#/adicionar" class="column">
+                <p class="icon ion-plus-round"></p>
+                <p class="label">Adicionar</p>
+            </a>
+            <a href="#/visualizar" class="column">
+                <p class="icon ion-document"></p>
+                <p class="label">Visualizar</p>
+            </a>
+        </div>
+        <div class="row">
+            <div class="column">
+                <p class="icon ion-gear-a"></p>
+                <p class="label">Configuraçoes</p>
+            </div>
+            <div class="column">
+                <p class="icon ion-information"></p>
+                <p class="label">Sobre</p>
+            </div>
+        </div>-->
+</div>    
 

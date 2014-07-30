@@ -41,8 +41,7 @@ persistence.onSuccess = function(tx, r) {
 persistence.createTable = function(callback) {
     persistence.db.transaction(function(tx) {
         tx.executeSql('CREATE TABLE IF NOT EXISTS "tbcategoria" ("cdCategoria" INTEGER PRIMARY KEY  NOT NULL , "stCategoria" TEXT NOT NULL, "qtUsado" INTEGER DEFAULT 0)');
-        tx.executeSql('CREATE TABLE IF NOT EXISTS "tbcategoriadesp" ("cdCategoria" INTEGER, "cdDespesa" INTEGER, PRIMARY KEY ("cdCategoria", "cdDespesa"))');
-        tx.executeSql('CREATE TABLE IF NOT EXISTS "tbdespesa" ("cdDespesa" INTEGER PRIMARY KEY NOT NULL, "vlDespesa" REAL NOT NULL, "dtDespesa" TEXT NOT NULL, "stObservacao" TEXT)');
+        tx.executeSql('CREATE TABLE IF NOT EXISTS "tbdespesa" ("cdDespesa" INTEGER PRIMARY KEY NOT NULL, "vlDespesa" REAL NOT NULL, "dtDespesa" TEXT NOT NULL, "stObservacao" TEXT, "cdCategoria" INTEGER)');
     }, persistence.onError, callback)
 }
 

@@ -1,0 +1,35 @@
+{
+  "name": "Meu orçamento",
+  "version": "1.0.0",
+  "authors": [
+    "Craveiro <henrique.cne@gmail.com>"
+  ],
+  "description": "Meu Orçamento",
+  "main": "index.html",
+  "moduleType": [
+    "amd",
+    "es6",
+    "globals",
+    "node",
+    "yui"
+  ],
+  "keywords": [
+    "orcamento",
+    "dinheiro",
+    "money"
+  ],
+  "license": "MIT",
+  "homepage": "http://henriquecraveiro.com.br/meuorcamento",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "amcharts": "~3.10.0",
+    "jquery": "~2.1.1"
+  }
+}
