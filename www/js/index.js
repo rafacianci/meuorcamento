@@ -8,11 +8,19 @@ app.config(['$routeProvider',
                 }).
                 when('/despesa/adicionar', {
                     templateUrl: 'templates/adicionar.html',
-                    controller: 'AdicionarCtrl'
+                    controller: 'DespesaAdicionarCtrl'
                 }).
                 when('/despesa/visualizar', {
                     templateUrl: 'templates/visualizar.html',
-                    controller: 'VisualizarCtrl'
+                    controller: 'DespesaVisualizarCtrl'
+                }).
+                when('/receita/adicionar', {
+                    templateUrl: 'templates/adicionar.html',
+                    controller: 'ReceitaAdicionarCtrl',
+                }).
+                when('/receita/visualizar', {
+                    templateUrl: 'templates/visualizar.html',
+                    controller: 'ReceitaVisualizarCtrl',
                 }).
                 otherwise({
                     redirectTo: '/home'
@@ -24,105 +32,121 @@ app.controller('HomeCtrl', function($scope, $location) {
     $('#chartdiv-geral').height(altura);
     $('#chartdiv-despesas').height(altura);
     $('#chartdiv-receitas').height(altura);
-
-    var chart = AmCharts.makeChart("chartdiv-geral", {
-        "type": "serial",
-        "theme": "dark",
-        "rotate": false,
-        "dataProvider": [{
-                "tipo": "Despesas",
-                "valor": 200,
-                "color": "#FEC628"
-            }, {
-                "tipo": "Receitas",
-                "valor": 1882,
-                "color": "#3498db"
-            }],
-        "valueAxes": [{
-                "axisAlpha": 0,
-//                "position": "right",
-//                "title": "Despesas X Receitas"
-            }],
-        "startDuration": 1,
-        "graphs": [{
-                "balloonText": "<b>[[category]]: [[value]]</b>",
-                "colorField": "color",
-                "fillAlphas": 0.9,
-                "lineAlpha": 0.2,
-                "type": "column",
-                "valueField": "valor"
-            }],
-        "chartCursor": {
-            "categoryBalloonEnabled": false,
-            "cursorAlpha": 0,
-            "zoomable": false
-        },
-        "categoryField": "tipo",
-        "categoryAxis": {
-            "gridPosition": "start",
-            "labelRotation": 0
-        },
+    var SQL = "SELECT sum(d.vlDespesa) AS vlDespesa FROM tbtransacao AS d";
+    persistence.executeSql(SQL, [], function(despesas) {
+        console.log(despesas);
+        var chart = AmCharts.makeChart("chartdiv-geral", {
+            "type": "serial",
+            "theme": "dark",
+            "rotate": false,
+            "dataProvider": [{
+                    "tipo": "Despesas",
+                    "valor": despesas[0].vlDespesa,
+                    "color": "#FEC628"
+                }, {
+                    "tipo": "Receitas",
+                    "valor": 1882,
+                    "color": "#3498db"
+                }],
+            "valueAxes": [{
+                    "axisAlpha": 0,
+    //                "position": "right",
+    //                "title": "Despesas X Receitas"
+                }],
+            "startDuration": 1,
+            "graphs": [{
+                    "balloonText": "<b>[[category]]: [[value]]</b>",
+                    "colorField": "color",
+                    "fillAlphas": 0.9,
+                    "lineAlpha": 0.2,
+                    "type": "column",
+                    "valueField": "valor"
+                }],
+            "chartCursor": {
+                "categoryBalloonEnabled": false,
+                "cursorAlpha": 0,
+                "zoomable": false
+            },
+            "categoryField": "tipo",
+            "categoryAxis": {
+                "gridPosition": "start",
+                "labelRotation": 0
+            },
+        });
     });
-
-    var SQL = "SELECT * FROM tbdespesa AS d JOIN tbcategoria AS c ON c.cdCategoria = d.cdCategoria";
+    
+    var SQL = "SELECT d.cdCategoria, c.stCategoria, sum(d.vlDespesa) AS vlDespesa FROM tbtransacao AS d JOIN tbcategoria AS c ON c.cdCategoria = d.cdCategoria GROUP BY d.cdCategoria";
     persistence.executeSql(SQL, [], function(despesas) {
         console.log(despesas)
-    })
-    var chartDespesa = AmCharts.makeChart("chartdiv-despesas", {
-        "type": "pie",
-        "theme": "dark",
-        "labelText": "R$ [[percents]]",
-        "innerRadius": "40%",
-        "titleField": "category",
-        "valueField": "column-1",
-        "allLabels": [],
-        "balloon": {},
-        "titles": [],
-        "dataProvider": [
-            {
-                "category": "carro",
-                "column-1": 8
-            },
-            {
-                "category": "moto",
-                "column-1": 6
-            },
-            {
-                "category": "estudo",
-                "column-1": 2
-            }
-        ]
-    });
 
+        var chartDespesa = AmCharts.makeChart("chartdiv-despesas", {
+            "type": "pie",
+            "theme": "dark",
+            "labelText": "[[title]] - R$ [[value]]",
+            "innerRadius": "40%",
+            "titleField": "stCategoria",
+            "valueField": "vlDespesa",
+            "allLabels": [],
+            "balloon": {},
+            "titles": [],
+            "dataProvider": despesas
+        });
+    });
+    
     $scope.goTo = function(url) {
         $location.path(url);
     }
 
 });
-app.controller('AdicionarCtrl', function($scope, $location) {
-
+app.controller('DespesaAdicionarCtrl', function($scope, $location) {
+    $scope.title = "Adicionar despesas";
+    
     var categoriaModel = new model.Categoria();
     $scope.dtDespesa = new Date();
+    
     $scope.adicionar = function() {
         if (!($scope.vlDespesa) && !($scope.vlDespesa > 0)) {
             return;
         }
-
-        var despesaModel = new model.Despesa();
-        var insert = {
-            vlDespesa: $scope.vlDespesa,
-            dtDespesa: new Date($scope.dtDespesa).getTime() / 1000,
-            stObservacao: $scope.stObservacao,
-            cdCategoria: $scope.categoria.cdCategoria
+        if(!$scope.categoriaAux){
+            console.log('Selecione uma categoria');
+            return;
         }
-        
-        despesaModel.insert(insert);
 
-        $location.path('/home')
+        var where = 'upper(stCategoria) = upper("' + $scope.categoriaAux + '")';
+        categoriaModel.fetchAll({'where' : where}, function(cats){
+            console.log(cats);
+            if (cats.length == 0){
+                categoriaModel.insert({stCategoria : $scope.categoriaAux}, function(cdCategoria){
+                    console.log('Inseriu esse caralho: ', cdCategoria);
+                    insereDespesa($scope.vlDespesa, $scope.dtDespesa, $scope.stObservacao, cdCategoria);
+                });
+            }else{
+                console.log(cats[0].cdCategoria);
+                insereDespesa($scope.vlDespesa, $scope.dtDespesa, $scope.stObservacao, cats[0].cdCategoria);
+            }
+        })
+    
+        
+        function insereDespesa(vlDespesa, dtDespesa, stObservacao, cdCategoria){
+            var despesaModel = new model.Transacao();
+
+            var insert = {
+               'vlDespesa' : vlDespesa,
+               'dtDespesa' : new Date(dtDespesa).getTime() / 1000,
+               'stObservacao' : stObservacao,
+               'cdCategoria' : cdCategoria,
+               'inTipo' : 'D'
+            }
+            console.log(insert);
+            despesaModel.insert(insert);
+            $location.path('/home');
+            $scope.$apply();
+        }        
     }
 
     $scope.addCategoria = function(categoria) {
-        $scope.categoria = categoria;
+        $scope.categoriaAux = categoria.stCategoria;
         $scope.categorias = {};
     }
 
@@ -145,21 +169,46 @@ app.controller('AdicionarCtrl', function($scope, $location) {
     }
 
 });
-app.controller('VisualizarCtrl', function($scope) {
-    var despesaModel = new model.Despesa();
+app.controller('DespesaVisualizarCtrl', function($scope) {
+    $scope.title = "Despesas";
+    var despesaModel = new model.Transacao();
     var newDesp = [];
-    var SQL = "SELECT d.*, GROUP_CONCAT(c.stCategoria) as stCategorias FROM tbdespesa d JOIN tbcategoriadesp cd ON cd.cdDespesa = d.cdDespesa JOIN tbcategoria c ON cd.cdCategoria = c.cdCategoria GROUP BY d.cdDespesa";
+    var SQL = "SELECT d.*, c.stCategoria as stCategorias FROM tbtransacao d JOIN tbcategoria c ON d.cdCategoria = c.cdCategoria WHERE d.inTipo = 'D'";
     persistence.executeSql(SQL, [], function(despesas) {
         for (i in despesas) {
             newDesp[i] = {
-                cdDespesa: despesas[i].cdDespesa,
+                cdTransacao: despesas[i].cdTransacao,
                 vlDespesa: despesas[i].vlDespesa,
                 dtDespesa: Util.timeStamp2Date(despesas[i].dtDespesa),
                 stCategorias: despesas[i].stCategorias
             }
-
         }
         $scope.despesas = newDesp;
         $scope.$apply();
     })
-})
+});
+
+app.controller('ReceitaAdicionarCtrl', function($scope){
+    $scope.title = "Receitas";    
+        
+});
+
+app.controller('ReceitaVisualizarCtrl', function($scope){
+    $scope.title = "Receitas";
+    var despesaModel = new model.Transacao();
+    var newDesp = [];
+    var SQL = "SELECT d.*, c.stCategoria as stCategorias FROM tbtransacao d JOIN tbcategoria c ON d.cdCategoria = c.cdCategoria WHERE d.inTipo = 'R'";
+    persistence.executeSql(SQL, [], function(despesas) {
+        for (i in despesas) {
+            newDesp[i] = {
+                cdTransacao: despesas[i].cdTransacao,
+                vlDespesa: despesas[i].vlDespesa,
+                dtDespesa: Util.timeStamp2Date(despesas[i].dtDespesa),
+                stCategorias: despesas[i].stCategorias
+            }
+        }
+        $scope.despesas = newDesp;
+        $scope.$apply();
+    })
+    
+});

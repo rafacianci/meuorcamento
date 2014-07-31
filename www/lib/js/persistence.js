@@ -30,7 +30,7 @@ persistence.executeSql = function(sql, params, callback) {
 
 persistence.onError = function(tx, rs) {
     console.log(rs.message);
-//    console.log(tx);
+    console.log(tx);
 //    console.log("Erro");
 }
 
@@ -41,7 +41,7 @@ persistence.onSuccess = function(tx, r) {
 persistence.createTable = function(callback) {
     persistence.db.transaction(function(tx) {
         tx.executeSql('CREATE TABLE IF NOT EXISTS "tbcategoria" ("cdCategoria" INTEGER PRIMARY KEY  NOT NULL , "stCategoria" TEXT NOT NULL, "qtUsado" INTEGER DEFAULT 0)');
-        tx.executeSql('CREATE TABLE IF NOT EXISTS "tbdespesa" ("cdDespesa" INTEGER PRIMARY KEY NOT NULL, "vlDespesa" REAL NOT NULL, "dtDespesa" TEXT NOT NULL, "stObservacao" TEXT, "cdCategoria" INTEGER)');
+        tx.executeSql('CREATE TABLE IF NOT EXISTS "tbtransacao" ("cdTransacao" INTEGER PRIMARY KEY NOT NULL, "vlDespesa" REAL NOT NULL, "dtDespesa" TEXT NOT NULL, "stObservacao" TEXT, "cdCategoria" INTEGER, "inTipo" TEXT)');
     }, persistence.onError, callback)
 }
 
@@ -213,19 +213,13 @@ model.Categoria = function(){
     this.fields = ["cdCategoria", "stCategoria"];
     this.pk = ["cdCategoria"];
 }
-model.CategoriaDesp = function(){
-    this.table = "tbcategoriadesp";
-    this.fields = ["cdCategoria", "cdDespesa"];
-    this.pk = ["cdCategoria", "cdDespesa"];
-}
-model.Despesa = function() {
-    this.table = "tbdespesa";
-    this.fields = ["cdDespesa", "vlDespesa", "dtDespesa", "stObservacao"];
-    this.pk = ["cdDespesa"];
+model.Transacao = function() {
+    this.table = "tbtransacao";
+    this.fields = ["cdTransacao", "vlDespesa", "dtDespesa", "stObservacao", "cdCategoria", "inTipo"];
+    this.pk = ["cdTransacao"];
 }
 model.Categoria.prototype = new model.Abstract();
-model.CategoriaDesp.prototype = new model.Abstract();
-model.Despesa.prototype = new model.Abstract();
+model.Transacao.prototype = new model.Abstract();
 
 //Constantes Config
 //model.Config.PEDIDO_VALIDA_SALDO = "APP_FV_PEDIDO_VALIDA_SALDO"
