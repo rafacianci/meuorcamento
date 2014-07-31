@@ -32,7 +32,7 @@ app.controller('HomeCtrl', function($scope, $location) {
     $('#chartdiv-geral').height(altura);
     $('#chartdiv-despesas').height(altura);
     $('#chartdiv-receitas').height(altura);
-    var SQL = "SELECT sum(d.vlDespesa) AS vlDespesa FROM tbtransacao AS d";
+    var SQL = "SELECT t.inTipo,  sum(t.vlDespesa) AS valor FROM tbtransacao AS t GROUP BY t.inTipo";
     persistence.executeSql(SQL, [], function(despesas) {
         console.log(despesas);
         var chart = AmCharts.makeChart("chartdiv-geral", {
@@ -41,11 +41,11 @@ app.controller('HomeCtrl', function($scope, $location) {
             "rotate": false,
             "dataProvider": [{
                     "tipo": "Despesas",
-                    "valor": despesas[0].vlDespesa,
+                    "valor": despesas[0].valor,
                     "color": "#FEC628"
                 }, {
                     "tipo": "Receitas",
-                    "valor": 1882,
+                    "valor": despesas[1].valor,
                     "color": "#3498db"
                 }],
             "valueAxes": [{
@@ -75,7 +75,7 @@ app.controller('HomeCtrl', function($scope, $location) {
         });
     });
     
-    var SQL = "SELECT d.cdCategoria, c.stCategoria, sum(d.vlDespesa) AS vlDespesa FROM tbtransacao AS d JOIN tbcategoria AS c ON c.cdCategoria = d.cdCategoria GROUP BY d.cdCategoria";
+    var SQL = "SELECT d.cdCategoria, c.stCategoria, sum(d.vlDespesa) AS vlDespesa FROM tbtransacao AS d JOIN tbcategoria AS c ON c.cdCategoria = d.cdCategoria WHERE inTipo = 'D' GROUP BY d.cdCategoria";
     persistence.executeSql(SQL, [], function(despesas) {
         console.log(despesas)
 
@@ -93,13 +93,31 @@ app.controller('HomeCtrl', function($scope, $location) {
         });
     });
     
+    var SQL = "SELECT d.cdCategoria, c.stCategoria, sum(d.vlDespesa) AS vlReceita FROM tbtransacao AS d JOIN tbcategoria AS c ON c.cdCategoria = d.cdCategoria WHERE inTipo = 'R' GROUP BY d.cdCategoria";
+    persistence.executeSql(SQL, [], function(receitas) {
+        console.log(receitas)
+
+        var chartDespesa = AmCharts.makeChart("chartdiv-receitas", {
+            "type": "pie",
+            "theme": "dark",
+            "labelText": "[[title]] - R$ [[value]]",
+            "innerRadius": "40%",
+            "titleField": "stCategoria",
+            "valueField": "vlReceita",
+            "allLabels": [],
+            "balloon": {},
+            "titles": [],
+            "dataProvider": receitas    
+        });
+    });
+    
     $scope.goTo = function(url) {
         $location.path(url);
     }
 
 });
 app.controller('DespesaAdicionarCtrl', function($scope, $location) {
-    $scope.title = "Adicionar despesas";
+    $scope.title = "Adicionar despesa";
     
     var categoriaModel = new model.Categoria();
     $scope.dtDespesa = new Date();
@@ -171,6 +189,7 @@ app.controller('DespesaAdicionarCtrl', function($scope, $location) {
 });
 app.controller('DespesaVisualizarCtrl', function($scope) {
     $scope.title = "Despesas";
+    $scope.urlAdd = "#/despesa/adicionar";
     var despesaModel = new model.Transacao();
     var newDesp = [];
     var SQL = "SELECT d.*, c.stCategoria as stCategorias FROM tbtransacao d JOIN tbcategoria c ON d.cdCategoria = c.cdCategoria WHERE d.inTipo = 'D'";
@@ -188,13 +207,81 @@ app.controller('DespesaVisualizarCtrl', function($scope) {
     })
 });
 
-app.controller('ReceitaAdicionarCtrl', function($scope){
-    $scope.title = "Receitas";    
+app.controller('ReceitaAdicionarCtrl', function($scope, $location){
+    $scope.title = "Adicionar receita";
+    
+    var categoriaModel = new model.Categoria();
+    $scope.dtDespesa = new Date();
+    
+    $scope.adicionar = function() {
+        if (!($scope.vlDespesa) && !($scope.vlDespesa > 0)) {
+            return;
+        }
+        if(!$scope.categoriaAux){
+            console.log('Selecione uma categoria');
+            return;
+        }
+
+        var where = 'upper(stCategoria) = upper("' + $scope.categoriaAux + '")';
+        categoriaModel.fetchAll({'where' : where}, function(cats){
+            console.log(cats);
+            if (cats.length == 0){
+                categoriaModel.insert({stCategoria : $scope.categoriaAux}, function(cdCategoria){
+                    console.log('Inseriu esse caralho: ', cdCategoria);
+                    insereDespesa($scope.vlDespesa, $scope.dtDespesa, $scope.stObservacao, cdCategoria);
+                });
+            }else{
+                console.log(cats[0].cdCategoria);
+                insereDespesa($scope.vlDespesa, $scope.dtDespesa, $scope.stObservacao, cats[0].cdCategoria);
+            }
+        })
+    
+        
+        function insereDespesa(vlDespesa, dtDespesa, stObservacao, cdCategoria){
+            var despesaModel = new model.Transacao();
+
+            var insert = {
+               'vlDespesa' : vlDespesa,
+               'dtDespesa' : new Date(dtDespesa).getTime() / 1000,
+               'stObservacao' : stObservacao,
+               'cdCategoria' : cdCategoria,
+               'inTipo' : 'R'
+            }
+            console.log(insert);
+            despesaModel.insert(insert);
+            $location.path('/home');
+            $scope.$apply();
+        }        
+    }
+
+    $scope.addCategoria = function(categoria) {
+        $scope.categoriaAux = categoria.stCategoria;
+        $scope.categorias = {};
+    }
+
+    $scope.listCategorias = function() {    
+        persistence.executeSql("SELECT * FROM tbcategoria WHERE stCategoria LIKE '" + $scope.categoriaAux + "%'", [], function(categorias) {
+            console.log(categorias);
+            if (categorias.length == 0) {
+                $scope.categorias = {};
+            }
+            $scope.categorias = categorias;
+            $scope.$apply();
+        })
+    }
+
+    $scope.textAreaAdjuste = function($event) {
+        if ($event.keyCode == 13) {
+            var ta = document.getElementById('observacao');
+            ta.style.height = (ta.scrollHeight) + "px";
+        }
+    }
         
 });
 
 app.controller('ReceitaVisualizarCtrl', function($scope){
     $scope.title = "Receitas";
+    $scope.urlAdd = "#/receita/adicionar";
     var despesaModel = new model.Transacao();
     var newDesp = [];
     var SQL = "SELECT d.*, c.stCategoria as stCategorias FROM tbtransacao d JOIN tbcategoria c ON d.cdCategoria = c.cdCategoria WHERE d.inTipo = 'R'";
