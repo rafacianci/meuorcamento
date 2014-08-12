@@ -1,0 +1,23 @@
+<% include ../header %>
+<header>
+   <h2>NTalk - Editar contato</h2>
+</header>
+<div class="container">
+		<div class="jumbotron">
+			<form role="form" action="/contato/<%- id %>" method="post">
+				<div class="form-group">
+					<input type="hidden" name="_method" value="put">
+			    	<label>Nome</label>
+				    <input type="text" class="form-control" name="contato[nome]" value="<%- contato.nome %>">
+			  	</div>
+			  	<div class="form-group">
+					<label>Nome</label>
+				    <input type="text" class="form-control" name="contato[email]" value="<%- contato.email %>">
+			  	</div>
+			  	
+			  <button type="submit" class="btn btn-default">Atualizar</button>
+			</form>
+		</div>
+	</div>
+
+<% include ../footer %>	

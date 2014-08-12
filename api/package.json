@@ -1,0 +1,15 @@
+{
+  "name": "meuorcamento",
+  "description": "Meu orcamento é um app para controle financeiro",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "node app.js"
+  },
+  "dependencies": {
+    "express": "3.3.3",
+    "express-load": "1.1.7",
+    "ejs": "0.8.4",
+    "mongoose": "3.6.14"
+  }
+}

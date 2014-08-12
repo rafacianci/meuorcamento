@@ -1,0 +1,79 @@
+0 info it worked if it ends with ok
+1 verbose cli [ 'node', '/usr/local/bin/npm', 'install' ]
+2 info using npm@1.4.3
+3 info using node@v0.10.26
+4 verbose readDependencies using package.json deps
+5 verbose install where, deps [ '/Users/lucasmarin/Developer/meuorcamento-backend',
+5 verbose install   [ 'express', 'express-load', 'ejs', 'mongooso' ] ]
+6 info preinstall meuorcamento@0.0.1
+7 verbose readDependencies using package.json deps
+8 verbose already installed skipping ejs@0.8.4 /Users/lucasmarin/Developer/meuorcamento-backend
+9 verbose already installed skipping express@3.3.3 /Users/lucasmarin/Developer/meuorcamento-backend
+10 verbose cache add [ 'mongooso@3.6.14', null ]
+11 verbose cache add name=undefined spec="mongooso@3.6.14" args=["mongooso@3.6.14",null]
+12 verbose parsed url { protocol: null,
+12 verbose parsed url   slashes: null,
+12 verbose parsed url   auth: null,
+12 verbose parsed url   host: null,
+12 verbose parsed url   port: null,
+12 verbose parsed url   hostname: null,
+12 verbose parsed url   hash: null,
+12 verbose parsed url   search: null,
+12 verbose parsed url   query: null,
+12 verbose parsed url   pathname: 'mongooso@3.6.14',
+12 verbose parsed url   path: 'mongooso@3.6.14',
+12 verbose parsed url   href: 'mongooso@3.6.14' }
+13 verbose cache add name="mongooso" spec="3.6.14" args=["mongooso","3.6.14"]
+14 verbose parsed url { protocol: null,
+14 verbose parsed url   slashes: null,
+14 verbose parsed url   auth: null,
+14 verbose parsed url   host: null,
+14 verbose parsed url   port: null,
+14 verbose parsed url   hostname: null,
+14 verbose parsed url   hash: null,
+14 verbose parsed url   search: null,
+14 verbose parsed url   query: null,
+14 verbose parsed url   pathname: '3.6.14',
+14 verbose parsed url   path: '3.6.14',
+14 verbose parsed url   href: '3.6.14' }
+15 verbose addNamed [ 'mongooso', '3.6.14' ]
+16 verbose addNamed [ '3.6.14', '3.6.14' ]
+17 verbose already installed skipping express-load@1.1.7 /Users/lucasmarin/Developer/meuorcamento-backend
+18 silly lockFile f20294c6-mongooso-3-6-14 mongooso@3.6.14
+19 verbose lock mongooso@3.6.14 /Users/lucasmarin/.npm/f20294c6-mongooso-3-6-14.lock
+20 verbose url raw mongooso/3.6.14
+21 verbose url resolving [ 'https://registry.npmjs.org/', './mongooso/3.6.14' ]
+22 verbose url resolved https://registry.npmjs.org/mongooso/3.6.14
+23 info trying registry request attempt 1 at 15:10:21
+24 http GET https://registry.npmjs.org/mongooso/3.6.14
+25 http 404 https://registry.npmjs.org/mongooso/3.6.14
+26 silly registry.get cb [ 404,
+26 silly registry.get   { date: 'Tue, 12 Aug 2014 18:10:22 GMT',
+26 silly registry.get     server: 'CouchDB/1.5.0 (Erlang OTP/R16B03)',
+26 silly registry.get     'content-type': 'application/json',
+26 silly registry.get     'cache-control': 'max-age=0',
+26 silly registry.get     'content-length': '52',
+26 silly registry.get     'accept-ranges': 'bytes',
+26 silly registry.get     via: '1.1 varnish',
+26 silly registry.get     age: '0',
+26 silly registry.get     'x-served-by': 'cache-iad2127-IAD',
+26 silly registry.get     'x-cache': 'MISS',
+26 silly registry.get     'x-cache-hits': '0',
+26 silly registry.get     'x-timer': 'S1407867021.994009,VS0,VE55',
+26 silly registry.get     'keep-alive': 'timeout=10, max=50',
+26 silly registry.get     connection: 'Keep-Alive' } ]
+27 silly lockFile f20294c6-mongooso-3-6-14 mongooso@3.6.14
+28 silly lockFile f20294c6-mongooso-3-6-14 mongooso@3.6.14
+29 error 404 'mongooso' is not in the npm registry.
+29 error 404 You should bug the author to publish it
+29 error 404 It was specified as a dependency of 'meuorcamento'
+29 error 404
+29 error 404 Note that you can also install from a
+29 error 404 tarball, folder, or http url, or git url.
+30 error System Darwin 13.3.0
+31 error command "node" "/usr/local/bin/npm" "install"
+32 error cwd /Users/lucasmarin/Developer/meuorcamento-backend
+33 error node -v v0.10.26
+34 error npm -v 1.4.3
+35 error code E404
+36 verbose exit [ 1, true ]

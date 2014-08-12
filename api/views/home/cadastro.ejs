@@ -1,0 +1,14 @@
+<% include ../header %>
+<div class="container">	
+
+	<form role="form" action="/cadastrar" method="post" class="form-signin">
+		<h2>Cadastro</h2>
+		<div class="alert alert-danger" role="alert">
+  			<p class="alert-link"><%- erro.message %></p>
+		</div>
+		<input type="text" class="form-control" placeholder="Nome completo" name="usuario[nome]" required autofocus>
+		<input type="email" class="form-control" placeholder="Endereço de Email" name="usuario[email]" required>
+	    <input type="password" class="form-control" placeholder="Senha" name="usuario[senha]" required>
+		<button type="submit" class="btn btn-lg btn-primary btn-block">Login</button>
+	</form>
+</div>
