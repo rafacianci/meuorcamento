@@ -27,8 +27,6 @@ body {
 }
 .title{
     background-color: #FFF;
-    border-bottom: 1px solid #CCC;
-    box-shadow: 1px 1px 1px #CCC;
     height: 54px;
     position: fixed;
     top: 0px;
@@ -57,22 +55,24 @@ body {
     z-index: 2;
 }
 .input-android{
-    background: bottom left linear-gradient(#a9a9a9, #a9a9a9) no-repeat, bottom center linear-gradient(#a9a9a9, #a9a9a9) repeat-x, bottom right linear-gradient(#a9a9a9, #a9a9a9) no-repeat;
+    /*background: bottom left linear-gradient(#a9a9a9, #a9a9a9) no-repeat, bottom center linear-gradient(#a9a9a9, #a9a9a9) repeat-x, bottom right linear-gradient(#a9a9a9, #a9a9a9) no-repeat;*/
+    background: bottom left linear-gradient(#444, #444) no-repeat, bottom center linear-gradient(#444, #444) repeat-x, bottom right linear-gradient(#444, #444) no-repeat;
     background-size: 1px 6px, 1px 1px, 1px 6px;
     border: none;
-    color: #FFF;
+    color: #000;
     font-size: 18px;
     height: 30px;
     outline: none;
 }
 .input-android:focus{
-    background: bottom left linear-gradient(#0099cc, #0099cc) no-repeat, bottom center linear-gradient(#0099cc, #0099cc) repeat-x, bottom right linear-gradient(#0099cc, #0099cc) no-repeat;
+    /*background: bottom left linear-gradient(#0099cc, #0099cc) no-repeat, bottom center linear-gradient(#0099cc, #0099cc) repeat-x, bottom right linear-gradient(#0099cc, #0099cc) no-repeat;*/
+    background: bottom left linear-gradient(#000, #000) no-repeat, bottom center linear-gradient(#000, #000) repeat-x, bottom right linear-gradient(#000, #000) no-repeat;
     background-size: 1px 6px, 1px 1px, 1px 6px; 
 }  
 .input-android::-webkit-input-placeholder {
-    color: #EEE;
+    color: #000;
 }
-.input-icon{
+.input-icon{    
     float: left;
     height: 32px;
     margin-bottom: 20px;
@@ -87,7 +87,7 @@ body {
     width: 100%;
 }
 .input-icon .label{
-    color: #EEE;
+    color: #000;
     font-size: 14px;
     height: 14px;
     left: 30px;
@@ -104,7 +104,8 @@ body {
     bottom: 0px;
     float: left;
     position: absolute;
-    top: 55px;
+    /* overflow: hidden; */
+    top: 54px;
     width: 100%;
 }
 
@@ -177,7 +178,6 @@ body {
 
 /*=============== Adicionar ================*/
 .adicionar{
-    background-color:#EB4A24;   
     height: 100%;
     width: 100%;
 }
@@ -260,8 +260,8 @@ body {
     height: 83px;
 }
 .adicionar .categoria-lista{
-    background-color: #BD3617;
-    border: 1px solid #BD3617;
+    background-color: #FFF;
+    border: 1px solid #FFF;
     height: 150px;
     left: 20px;
     margin: 0px;
@@ -269,20 +269,25 @@ body {
     position: absolute;
     overflow-y: scroll;
     top: 29px;
-    width: 50%;
+    width: 70%;
     z-index: 3;
 }
 .adicionar .categoria-lista li{
     background-color: #FFF;
-    border-bottom: 1px solid #D93E1A;
+    border-bottom: 1px solid #000;
     padding: 10px 10px 10px 52px;
-    color: #D93E1A;
+    color: #000;
 }
 /* ========== VISUALIZAR =========== */
 .visualizar{
-    background-color:#EB4A24;   
     height: 100%;
     width: 100%;
+}
+.despesa{
+    background-color: #e74c3c;
+}
+.receita{
+    background-color: #3498DB;
 }
 .visualizar .row{
     border-bottom: 1px solid #FFF;
@@ -292,50 +297,51 @@ body {
     width: 100%;
 }
 .visualizar .lista{
-    background: #D93E1A;
     bottom: 0px;
-    border-bottom-left-radius: 8px;
-    border-bottom-right-radius: 8px;
     float: left;
     margin: 0px;
     overflow-x: hidden;
     overflow-y: scroll;
-    padding: 0px;
+    padding: 1px 0px;
     position: absolute;
     top: 54px;
     width: 100%;
 }
-
 .visualizar .item{
-    background: #EB4A24;
-    border-bottom: 1px solid #BD3617;
-    box-shadow: 1px 1px 1px #BD3617;
     box-sizing: border-box;
-    color: #FFF;
+    color: #000;
     float: left;
     height: 70px;
     margin: 0px;
-    margin-bottom: 3px;
+    margin-bottom: 0px;
     padding: 10px;
     position: relative;
     width: 100%;
 }
-.visualizar .item .valor{
+.despesa .item{
+    background-color: rgba(255,255,255,0.8);   
+    border-bottom: 1px solid #e74c3c;
+}
+.receita .item{
+    background-color: rgba(255,255,255,0.3);   
+    border-bottom: 1px solid #3498DB;
+}
+
+.visualizar .item .data{
     box-sizing: border-box;
     font-size: 18px;
-    font-weight: bold;
     right: 10px;
     position: absolute;
     text-align: right;
     width: 100%;
 }
-.visualizar .item .data{
+.visualizar .item .categoria{
     font-size: 18px;
     font-weight: bold;
     left: 10px;
     position: absolute;
 }   
-.visualizar .item .categoria{
+.visualizar .item .valor{
     float: left;
     position: relative;
     margin: 28px 0px 0px 0px;

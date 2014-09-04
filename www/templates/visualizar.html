@@ -1,4 +1,4 @@
-<div class="visualizar">
+<div class="visualizar" ng-class="classe">
     <div class="title">
         <a ng-href="#/home" class="button-left icon ion-chevron-left">Voltar</a>
         <span class="titulo">{{title}}</span> 
@@ -7,7 +7,7 @@
     <ul class="lista">
         <li ng-repeat="d in despesas">
             <ul class="item">
-                <li class="valor">R$: {{d.vlDespesa}}</li>
+                <li class="valor">{{d.vlDespesa | currency:'R$ '}}</li>
                 <li class="data">{{d.dtDespesa}}</li>
                 <li class="categoria">{{d.stCategorias}}</li>
             </ul>

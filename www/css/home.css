@@ -2,15 +2,16 @@
     /*border-bottom: 1px solid #FFF;*/
     display: block;
     float: left;
-    height: 60%;
+    height: 70%;
     position: relative;
+    overflow: hidden;
     margin-top: 0px;
     width: 100%;
     z-index: 1;
-    background-color: #BD3617;    
+    background-color: #000;    
 }
 #home .buttons{
-    height: 40%;
+    height: 30%;
     width: 100%;
     position: relative;
     float: left;
@@ -57,22 +58,26 @@
     float: left;
     font-size: 16px;
     font-weight: bold;
-    height: 33.4%;
+    /* min-height: 60px; */
+    height: 50%;
     position: relative;
     width: 100%;
     text-align: center;
     vertical-align: middle; 
+    overflow: hidden;
 }
-#home .button-double a{
-    margin-top: -10px;
-    top: 50%;
-    position: absolute;
-    width: 100%;
-    display: block;
-    height: 100%;
+#home .button-double p{
+    /* margin-top: -10px; */
+    /* top: 50%; */
+    position: relative;
+    width: 80%;
+    /* display: block; */
+    line-height: 60px;
+    /* height: 100%; */
+    float: left;
 }
 #home .button-despesas{
-    background-color: #FEC628;
+    background-color: #e74c3c;
 }
 #home .button-receitas{
     background-color: #3498db;
@@ -87,7 +92,7 @@
     height: 100%;
     position: relative;
     right: 0px;
-    width: 80px;
+    width: 20%;
     z-index: 2;
 }
 #home .button-plus .middle{

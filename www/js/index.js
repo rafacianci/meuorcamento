@@ -42,7 +42,7 @@ app.controller('HomeCtrl', function($scope, $location) {
             "dataProvider": [{
                     "tipo": "Despesas",
                     "valor": despesas[0].valor,
-                    "color": "#FEC628"
+                    "color": "#e74c3c"
                 }, {
                     "tipo": "Receitas",
                     "valor": despesas[1].valor,
@@ -95,8 +95,6 @@ app.controller('HomeCtrl', function($scope, $location) {
     
     var SQL = "SELECT d.cdCategoria, c.stCategoria, sum(d.vlDespesa) AS vlReceita FROM tbtransacao AS d JOIN tbcategoria AS c ON c.cdCategoria = d.cdCategoria WHERE inTipo = 'R' GROUP BY d.cdCategoria";
     persistence.executeSql(SQL, [], function(receitas) {
-        console.log(receitas)
-
         var chartDespesa = AmCharts.makeChart("chartdiv-receitas", {
             "type": "pie",
             "theme": "dark",
@@ -118,7 +116,7 @@ app.controller('HomeCtrl', function($scope, $location) {
 });
 app.controller('DespesaAdicionarCtrl', function($scope, $location) {
     $scope.title = "Adicionar despesa";
-    
+    $scope.classe = "despesa";
     var categoriaModel = new model.Categoria();
     $scope.dtDespesa = new Date();
     
@@ -190,6 +188,8 @@ app.controller('DespesaAdicionarCtrl', function($scope, $location) {
 app.controller('DespesaVisualizarCtrl', function($scope) {
     $scope.title = "Despesas";
     $scope.urlAdd = "#/despesa/adicionar";
+    $scope.classe = "despesa";
+    
     var despesaModel = new model.Transacao();
     var newDesp = [];
     var SQL = "SELECT d.*, c.stCategoria as stCategorias FROM tbtransacao d JOIN tbcategoria c ON d.cdCategoria = c.cdCategoria WHERE d.inTipo = 'D'";
@@ -209,6 +209,7 @@ app.controller('DespesaVisualizarCtrl', function($scope) {
 
 app.controller('ReceitaAdicionarCtrl', function($scope, $location){
     $scope.title = "Adicionar receita";
+    $scope.classe = "receita";
     
     var categoriaModel = new model.Categoria();
     $scope.dtDespesa = new Date();
@@ -282,6 +283,8 @@ app.controller('ReceitaAdicionarCtrl', function($scope, $location){
 app.controller('ReceitaVisualizarCtrl', function($scope){
     $scope.title = "Receitas";
     $scope.urlAdd = "#/receita/adicionar";
+    $scope.classe = "receita";
+    
     var despesaModel = new model.Transacao();
     var newDesp = [];
     var SQL = "SELECT d.*, c.stCategoria as stCategorias FROM tbtransacao d JOIN tbcategoria c ON d.cdCategoria = c.cdCategoria WHERE d.inTipo = 'R'";
