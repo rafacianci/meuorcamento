@@ -72,6 +72,9 @@ body {
 .input-android::-webkit-input-placeholder {
     color: #000;
 }
+.despesa .input-android::-webkit-input-placeholder {
+    color: #FFF;
+}
 .input-icon{    
     float: left;
     height: 32px;
@@ -278,16 +281,20 @@ body {
     padding: 10px 10px 10px 52px;
     color: #000;
 }
+.despesa .input-icon span, .despesa .input-icon input{
+    color: #FFF;
+}
 /* ========== VISUALIZAR =========== */
 .visualizar{
     height: 100%;
     width: 100%;
 }
 .despesa{
-    background-color: #e74c3c;
+    background-color: #E50100;
+    
 }
 .receita{
-    background-color: #3498DB;
+    background-color: #77CC33;
 }
 .visualizar .row{
     border-bottom: 1px solid #FFF;
@@ -325,7 +332,7 @@ body {
 }
 .receita .item{
     background-color: #FFF;   
-    border-bottom: 1px solid #3498DB;
+    border-bottom: 1px solid #77CC33;
     transition: width .3s;
 }
 

@@ -77,10 +77,11 @@
     float: left;
 }
 #home .button-despesas{
-    background-color: #e74c3c;
+    background-color: #E50100;
+    color: #FFF;
 }
 #home .button-receitas{
-    background-color: #3498db;
+    background-color: #77CC33;
 }
 #home .button-sobre{
     background-color: #B8B8B1;
