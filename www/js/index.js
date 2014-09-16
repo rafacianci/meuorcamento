@@ -1,4 +1,4 @@
-var app = angular.module('app', ['ngRoute', 'ngAnimate', 'angular-carousel']);
+var app = angular.module('app', ['ngRoute', 'ngAnimate', 'angular-carousel', 'ngTouch']);
 app.config(['$routeProvider',
     function($routeProvider) {
         $routeProvider.
@@ -205,6 +205,39 @@ app.controller('DespesaVisualizarCtrl', function($scope) {
         $scope.despesas = newDesp;
         $scope.$apply();
     })
+    $scope.swipeLeft = function(i){
+        console.log('Swipe Left');
+        var elemento = $('.index-' + i);
+        var tamanho = elemento.outerWidth();
+        if(!elemento.hasClass('aberto')){
+            window.console.log('Aquiii');
+            elemento.addClass('aberto');
+            tamanho = tamanho - 60;
+            elemento.css({width : tamanho + 'px'});
+        }
+    }
+    $scope.swipeRight = function(i){
+        console.log('Swipe Right');
+        var elemento = $('.index-' + i);
+        var tamanho = elemento.outerWidth();
+        if(elemento.hasClass('aberto')){
+            elemento.removeClass('aberto');
+            tamanho = tamanho + 60;
+            elemento.css({width : tamanho + 'px'});
+        }
+    }
+    $scope.excluir = function(d){
+        console.log(d.cdTransacao);
+        var transacaoModel = new model.Transacao();
+        transacaoModel.delete('cdTransacao = ' + d.cdTransacao);
+        for(di in $scope.despesas){
+            if($scope.despesas[di].cdTransacao == d.cdTransacao){
+                window.console.log('encontrou');
+                $scope.despesas.splice(di, 1);
+            }
+        }
+    }
+    
 });
 
 app.controller('ReceitaAdicionarCtrl', function($scope, $location){
@@ -301,4 +334,37 @@ app.controller('ReceitaVisualizarCtrl', function($scope){
         $scope.$apply();
     })
     
+    $scope.swipeLeft = function(i){
+        console.log('Swipe Left');
+        var elemento = $('.index-' + i);
+        var tamanho = elemento.outerWidth();
+        if(!elemento.hasClass('aberto')){
+            window.console.log('Aquiii');
+            elemento.addClass('aberto');
+            tamanho = tamanho - 60;
+            elemento.css({width : tamanho + 'px'});
+        }
+    }
+    $scope.swipeRight = function(i){
+        console.log('Swipe Right');
+        var elemento = $('.index-' + i);
+        var tamanho = elemento.outerWidth();
+        if(elemento.hasClass('aberto')){
+            elemento.removeClass('aberto');
+            tamanho = tamanho + 60;
+            elemento.css({width : tamanho + 'px'});
+        }
+    }
+    $scope.excluir = function(d){
+        console.log(d.cdTransacao);
+        var transacaoModel = new model.Transacao();
+        transacaoModel.delete('cdTransacao = ' + d.cdTransacao);
+        for(di in $scope.despesas){
+            if($scope.despesas[di].cdTransacao == d.cdTransacao){
+                window.console.log('encontrou');
+                $scope.despesas.splice(di, 1);
+            }
+        }
+    }
 });
+

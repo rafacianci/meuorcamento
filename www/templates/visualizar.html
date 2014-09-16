@@ -5,11 +5,14 @@
         <a ng-href="{{urlAdd}}" class="button-right">Adicionar</a>
     </div>
     <ul class="lista">
-        <li ng-repeat="d in despesas">
-            <ul class="item">
+        <li ng-repeat="d in despesas" ng-swipe-left="swipeLeft($index)" ng-swipe-right="swipeRight($index)" class="list-row">
+            <ul class="item index-{{$index}}">
                 <li class="valor">{{d.vlDespesa | currency:'R$ '}}</li>
                 <li class="data">{{d.dtDespesa}}</li>
                 <li class="categoria">{{d.stCategorias}}</li>
+            </ul>
+            <ul class="item-exluir">
+                <button class="icon ion-ios7-trash-outline" ng-click="excluir(d)"></button>
             </ul>
         </li>
     </ul>

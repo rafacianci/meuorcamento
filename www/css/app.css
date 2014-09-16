@@ -317,14 +317,16 @@ body {
     padding: 10px;
     position: relative;
     width: 100%;
+    z-index: 2;
 }
 .despesa .item{
-    background-color: rgba(255,255,255,0.8);   
+    background-color: #FFF;   
     border-bottom: 1px solid #e74c3c;
 }
 .receita .item{
-    background-color: rgba(255,255,255,0.3);   
+    background-color: #FFF;   
     border-bottom: 1px solid #3498DB;
+    transition: width .3s;
 }
 
 .visualizar .item .data{
@@ -354,4 +356,21 @@ body {
     height: 100%;
     position: absolute;
     width: 100%;
+}
+.list-row{
+    height: 70px;
+    position: relative;
+    width: 100%;
+}
+.item-exluir button{
+    background-color: #F00;
+    border: none;
+    color: #FFF;
+    font-size: 28px;
+    height: 69px;
+    right: 0px;
+    top: 0px;
+    margin: 0;
+    position: absolute;
+    width: 60px;
 }
